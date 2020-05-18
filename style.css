@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  background-color: #eee;
+}
+
+form {
+  margin: 30px;
+}
+
+#bloc_nom_JF {
+  display: none;
+}
+
+.erreur {
+  padding-left: 10px;
+  color: red;
+}
