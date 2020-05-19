@@ -11,6 +11,8 @@
 <!--
 
 Feuille de score It's a Wonderful World
+Idée : Demander le nombre de joueurs >
+
 - Programmer les différents calculs de points :
   - pt victoire brut
   - Nb cartes couleur x Multiplicateur [gris, noir, vert, jaune, bleu]
@@ -21,11 +23,45 @@ Feuille de score It's a Wonderful World
 -->
 
 <body>
-
+  <button onclick="calc_score()">Joueur 1</button>
 <!-- Intégration de mon Javascript -->
-    <script type="text/javascript">
-
-    </script>
+  <script type="text/javascript">
+    //Fonctions de calculs
+      //Points direct
+    function pts_direct() {
+      var nb_pts_direct = prompt("Quel est votre nombre de points direct ?");
+      return nb_pts_direct;
+    }
+      //Points cartes
+    function pts_cartes(couleur) {
+      var nb_cartes = prompt("Quel est votre nombre de cartes " + couleur +  " ?");
+      var multiplicateur = prompt("Quel est votre multiplicateur de point pour les cartes " + couleur + " ?");
+      var nb_pts_cartes = nb_cartes * multiplicateur;
+      return nb_pts_cartes;
+    }
+      //Points jetons
+    function pts_jetons(couleur) {
+      var nb_jetons = prompt("Quel est votre nombre de jetons " + couleur +  " ?");
+      var multiplicateur = prompt("Quel est votre multiplicateur de point pour les jetons " + couleur + " ?");
+      multiplicateur ++;
+      var nb_pts_jetons = nb_jetons * multiplicateur;
+      return nb_pts_jetons;
+    }
+    //MegaFontion calcul du score
+    function calc_score() {
+      //direct
+      var pts_victoire_direct = pts_direct();
+      //cartes
+      var pts_cartes_grises = pts_cartes("grises");
+      var pts_cartes_noires = pts_cartes("noires");
+      var pts_cartes_jaunes = pts_cartes("jaunes");
+      var pts_cartes_vertes = pts_cartes("vertes");
+      var pts_cartes_bleues = pts_cartes("bleues");
+      //jetons
+      var pts_jetons_bleues = pts_jetons("bleus");
+      var pts_cartes_rouges = pts_jetons("rouges");
+    }
+  </script>
 <!-- Intégration de la feuille de script -->
   <script type="text/javascript" src="js/script.js"></script>
 </body>
