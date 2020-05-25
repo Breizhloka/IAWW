@@ -11,7 +11,8 @@
 <!--
 
 Feuille de score It's a Wonderful World
-Idée : Demander le nombre de joueurs >
+Idée 1 : Demander le nombre de joueurs > nb_bouton = nb_joueurs > entrer les données pour chaque joueur > remplir un tableau avec les données.
+Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée = au nb de joueurs > remplir les champs pour chacun > créer un tableau des scores.
 
 - Programmer les différents calculs de points :
   - pt victoire brut
@@ -23,29 +24,78 @@ Idée : Demander le nombre de joueurs >
 -->
 
 <body>
-  <button onclick="calc_score()">Joueur 1</button>
+  <form name="fromulaire" onsubmit="calc_score()">
+    <label for="pts_vict">Points de victoire</label>
+    <input type="text" class="intext" name="pts_vict" id="pts_vict">
+  </br></br>
+
+    <label for="pts_cartes_grises">Cartes grises</label>
+    <input type="text" class="intext" name="pts_cartes_grises" id="pts_cartes_grises">
+    <label for="mult_cartes_grises">Multiplicateur</label>
+    <input type="text" class="intext" name="mult_cartes_grises" id="mult_cartes_grises">
+   </br>
+
+   <label for="pts_cartes_noires">Cartes noires</label>
+   <input type="text" class="intext" name="pts_cartes_noires" id="pts_cartes_noires">
+   <label for="mult_cartes_grises">Multiplicateur</label>
+   <input type="text" class="intext" name="mult_cartes_noires" id="mult_cartes_noires">
+  </br>
+
+    <label for="pts_cartes_jaunes">Cartes jaunes</label>
+    <input type="text" class="intext" name="pts_cartes_jaunes" id="pts_cartes_jaunes">
+    <label for="mult_cartes_jaunes">Multiplicateur</label>
+    <input type="text" class="intext" name="mult_cartes_jaunes" id="mult_cartes_jaunes">
+   </br>
+
+   <label for="pts_cartes_vertes">Cartes vertes</label>
+   <input type="text" class="intext" name="pts_cartes_vertes" id="pts_cartes_vertes">
+   <label for="mult_cartes_vertes">Multiplicateur</label>
+   <input type="text" class="intext" name="mult_cartes_vertes" id="mult_cartes_vertes">
+  </br>
+
+    <label for="pts_cartes_bleues">Cartes bleues</label>
+    <input type="text" class="intext" name="pts_cartes_bleues" id="pts_cartes_bleues">
+    <label for="mult_cartes_bleues">Multiplicateur</label>
+    <input type="text" class="intext" name="mult_cartes_bleues" id="mult_cartes_bleues">
+  </br></br>
+
+   <label for="pts_jetons_rouges">Jetons bleues</label>
+   <input type="text" class="intext" name="pts_jetons_rouges" id="pts_jetons_rouges">
+   <label for="mult_jetons_rouges">Multiplicateur</label>
+   <input type="text" class="intext" name="mult_jetons_rouges" id="mult_jetons_rouges">
+  </br>
+
+  <label for="pts_jetons_bleues">Jetons bleues</label>
+  <input type="text" class="intext" name="pts_jetons_bleues" id="pts_jetons_bleues">
+  <label for="mult_jetons_bleues">Multiplicateur</label>
+  <input type="text" class="intext" name="mult_jetons_bleues" id="mult_jetons_bleues">
+ </br></br>
+
+
+    <input class="btn" type="submit" value="Envoyer" id="btn_submit">
+  </form>
 <!-- Intégration de mon Javascript -->
   <script type="text/javascript">
     //Fonctions de calculs
       //Points direct
     function pts_direct() {
-      var nb_pts_direct = prompt("Quel est votre nombre de points direct ?");
-      return nb_pts_direct;
+      var nb_pts_direct = document.getElementById('pts_vict').value;
+      return parseInt(nb_pts_direct);
     }
       //Points cartes
     function pts_cartes(couleur) {
-      var nb_cartes = prompt("Quel est votre nombre de cartes " + couleur +  " ?");
-      var multiplicateur = prompt("Quel est votre multiplicateur de point pour les cartes " + couleur + " ?");
+      var nb_cartes = ;
+      var multiplicateur = ;
       var nb_pts_cartes = nb_cartes * multiplicateur;
-      return nb_pts_cartes;
+      return parseInt(nb_pts_cartes);
     }
       //Points jetons
     function pts_jetons(couleur) {
-      var nb_jetons = prompt("Quel est votre nombre de jetons " + couleur +  " ?");
-      var multiplicateur = prompt("Quel est votre multiplicateur de point pour les jetons " + couleur + " ?");
+      var nb_jetons = ;
+      var multiplicateur = ;
       multiplicateur ++;
       var nb_pts_jetons = nb_jetons * multiplicateur;
-      return nb_pts_jetons;
+      return parseInt(nb_pts_jetons);
     }
     //MegaFontion calcul du score
     function calc_score() {
@@ -59,7 +109,8 @@ Idée : Demander le nombre de joueurs >
       var pts_cartes_bleues = pts_cartes("bleues");
       //jetons
       var pts_jetons_bleues = pts_jetons("bleus");
-      var pts_cartes_rouges = pts_jetons("rouges");
+      var pts_jetons_rouges = pts_jetons("rouges");
+      return pts_victoire_direct + pts_cartes_grises + pts_cartes_noires + pts_cartes_jaunes + pts_cartes_vertes + pts_cartes_bleues + pts_jetons_rouges + pts_jetons_bleues;
     }
   </script>
 <!-- Intégration de la feuille de script -->
