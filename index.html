@@ -59,16 +59,16 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
     <input type="text" class="intext" name="mult_cartes_bleues" id="mult_cartes_bleues">
   </br></br>
 
-   <label for="pts_jetons_rouges">Jetons bleues</label>
+   <label for="pts_jetons_rouges">Jetons rouges</label>
    <input type="text" class="intext" name="pts_jetons_rouges" id="pts_jetons_rouges">
    <label for="mult_jetons_rouges">Multiplicateur</label>
    <input type="text" class="intext" name="mult_jetons_rouges" id="mult_jetons_rouges">
   </br>
 
-  <label for="pts_jetons_bleues">Jetons bleues</label>
-  <input type="text" class="intext" name="pts_jetons_bleues" id="pts_jetons_bleues">
-  <label for="mult_jetons_bleues">Multiplicateur</label>
-  <input type="text" class="intext" name="mult_jetons_bleues" id="mult_jetons_bleues">
+  <label for="pts_jetons_bleus">Jetons bleus</label>
+  <input type="text" class="intext" name="pts_jetons_bleus" id="pts_jetons_bleus">
+  <label for="mult_jetons_bleus">Multiplicateur</label>
+  <input type="text" class="intext" name="mult_jetons_bleus" id="mult_jetons_bleus">
  </br></br>
 
 
@@ -76,7 +76,7 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
   </form>
 <!-- Intégration de mon Javascript -->
   <script type="text/javascript">
-    //Fonctions de calculs
+    /*/Fonctions de calculs
       //Points direct
     function pts_direct() {
       var nb_pts_direct = document.getElementById('pts_vict').value;
@@ -96,9 +96,30 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       multiplicateur ++;
       var nb_pts_jetons = nb_jetons * multiplicateur;
       return parseInt(nb_pts_jetons);
-    }
+    }*/
+
     //MegaFontion calcul du score
     function calc_score() {
+      //direct
+      var pts_victoire_direct = document.getElementById('pts_vict').value;
+      //cartes
+      var pts_cartes_grises = document.getElementById('pts_cartes_grises').value * document.getElementById('mult_cartes_grises').value;
+      var pts_cartes_noires = document.getElementById('pts_cartes_noires').value * document.getElementById('mult_cartes_noires').value;
+      var pts_cartes_jaunes = document.getElementById('pts_cartes_jaunes').value * document.getElementById('mult_cartes_jaunes').value;
+      var pts_cartes_vertes = document.getElementById('pts_cartes_vertes').value * document.getElementById('mult_cartes_vertes').value;
+      var pts_cartes_bleues = document.getElementById('pts_cartes_bleues').value * document.getElementById('mult_cartes_bleues').value;
+      //jetons
+      var mult_jetons_rouges = document.getElementById('mult_jetons_rouges').value;
+      mult_jetons_rouges ++;
+      var pts_jetons_rouges = document.getElementById('pts_jetons_rouges').value * mult_jetons_rouges;
+      var mult_jetons_bleus = document.getElementById('mult_jetons_bleus').value;
+      mult_jetons_bleus ++;
+      var pts_jetons_bleus = document.getElementById('pts_jetons_bleus').value * mult_jetons_bleus;
+      alert(parseInt(pts_victoire_direct) + parseInt(pts_cartes_grises) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
+      return (parseInt(pts_victoire_direct) + parseInt(pts_cartes_grises) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
+    }
+
+    /*function calc_score() {
       //direct
       var pts_victoire_direct = pts_direct();
       //cartes
@@ -111,7 +132,7 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       var pts_jetons_bleues = pts_jetons("bleus");
       var pts_jetons_rouges = pts_jetons("rouges");
       return pts_victoire_direct + pts_cartes_grises + pts_cartes_noires + pts_cartes_jaunes + pts_cartes_vertes + pts_cartes_bleues + pts_jetons_rouges + pts_jetons_bleues;
-    }
+    }*/
   </script>
 <!-- Intégration de la feuille de script -->
   <script type="text/javascript" src="js/script.js"></script>
