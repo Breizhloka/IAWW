@@ -73,7 +73,6 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
     <input type="button" name="aj_li" value="aj_li" onclick="ajouter_ligne()">
   </form>
 
-  <!-- <button onclick="init_nb_joueur()">Commencer</button> -->
 <!-- Intégration de mon Javascript -->
   <script type="text/javascript">
     function afficher_resultat(){
@@ -98,28 +97,6 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
 
     }
 
-    /*/Fonctions de calculs
-      //Points direct
-    function pts_direct() {
-      var nb_pts_direct = document.getElementById('pts_vict').value;
-      return parseInt(nb_pts_direct);
-    }
-      //Points cartes
-    function pts_cartes(couleur) {
-      var nb_cartes = ;
-      var multiplicateur = ;
-      var nb_pts_cartes = nb_cartes * multiplicateur;
-      return parseInt(nb_pts_cartes);
-    }
-      //Points jetons
-    function pts_jetons(couleur) {
-      var nb_jetons = ;
-      var multiplicateur = ;
-      multiplicateur ++;
-      var nb_pts_jetons = nb_jetons * multiplicateur;
-      return parseInt(nb_pts_jetons);
-    }*/
-
     //MegaFontion calcul du score
     function calc_score() {
       //direct
@@ -139,21 +116,6 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       console.log(parseInt(pts_victoire_direct) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
       return (parseInt(pts_victoire_direct) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
     }
-
-    /*function calc_score() {
-      //direct
-      var pts_victoire_direct = pts_direct();
-      //cartes
-      var pts_cartes_grises = pts_cartes("grises");
-      var pts_cartes_noires = pts_cartes("noires");
-      var pts_cartes_jaunes = pts_cartes("jaunes");
-      var pts_cartes_vertes = pts_cartes("vertes");
-      var pts_cartes_bleues = pts_cartes("bleues");
-      //jetons
-      var pts_jetons_bleues = pts_jetons("bleus");
-      var pts_jetons_rouges = pts_jetons("rouges");
-      return pts_victoire_direct + pts_cartes_grises + pts_cartes_noires + pts_cartes_jaunes + pts_cartes_vertes + pts_cartes_bleues + pts_jetons_rouges + pts_jetons_bleues;
-    }*/
   </script>
 <!-- Intégration de la feuille de script -->
   <script type="text/javascript" src="js/script.js"></script>
