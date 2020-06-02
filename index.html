@@ -28,7 +28,7 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
     <table>
       <tr>
         <th>Joueur</th>
-        <th>pts victoire</th>
+        <th>Points de victoire</th>
         <th>Noir</th>
         <th>Jaune</th>
         <th>Vert</th>
@@ -43,78 +43,72 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
           <input type="text" class="pts_vict direct" name="pts_vict" id="pts_vict">
         </td>
         <td>
-          <input type="number" class="carte noir" name="pts_cartes_noires" id="pts_cartes_noires" placeholder="Nb cartes"> x
-          <input type="number" class="multiplicateur carte noir" name="mult_cartes_noires" id="mult_cartes_noires" placeholder="Multiplicateur">
+          <input type="number" class="nombre carte noir" name="pts_cartes_noires" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte noir" name="mult_cartes_noires" placeholder="Multiplicateur">
        </td>
         <td>
-          <input type="number" class="carte jaune" name="pts_cartes_jaunes" id="pts_cartes_jaunes" placeholder="Nb cartes"> x
-          <input type="number" class="multiplicateur carte jaune" name="mult_cartes_jaunes" id="mult_cartes_jaunes" placeholder="Multiplicateur">
+          <input type="number" class="nombre carte jaune" name="pts_cartes_jaunes" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte jaune" name="mult_cartes_jaunes" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="carte vert" name="pts_cartes_vertes" id="pts_cartes_vertes" placeholder="Nb cartes"> x
-          <input type="number" class="multiplicateur carte vert" name="mult_cartes_vertes" id="mult_cartes_vertes" placeholder="Multiplicateur">
+          <input type="number" class="nombre carte vert" name="pts_cartes_vertes" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte vert" name="mult_cartes_vertes" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="carte bleu" name="pts_cartes_bleues" id="pts_cartes_bleues" placeholder="Nb cartes"> x
-          <input type="number" class="multiplicateur carte bleu" name="mult_cartes_bleues" id="mult_cartes_bleues" placeholder="Multiplicateur">
+          <input type="number" class="nombre carte bleu" name="pts_cartes_bleues" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte bleu" name="mult_cartes_bleues" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="jeton rouge" name="pts_jetons_rouges" id="pts_jetons_rouges" placeholder="Nb jetons"> x
-          <input type="number" class="multiplicateur jeton rouge" name="mult_jetons_rouges" id="mult_jetons_rouges" placeholder="Multiplicateur">
+          <input type="number" class="nombre jeton rouge" name="pts_jetons_rouges" placeholder="Nb jetons"> x
+          <input type="number" class="multiplicateur jeton rouge" name="mult_jetons_rouges" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="jeton bleu" name="pts_jetons_bleus" id="pts_jetons_bleus" placeholder="Nb jetons"> x
-          <input type="number" class="multiplicateur jeton bleu" name="mult_jetons_bleus" id="mult_jetons_bleus" placeholder="Multiplicateur">
+          <input type="number" class="nombre jeton bleu" name="pts_jetons_bleus" placeholder="Nb jetons"> x
+          <input type="number" class="multiplicateur jeton bleu" name="mult_jetons_bleus" placeholder="Multiplicateur">
         </td>
-        <td><input type="number" id="total" class="pts_vict total" disabled></td>
+        <td><input type="number" class="pts_vict total" disabled></td>
       </tr>
     </table>
-    <input type="button" name="calculer" value="Calculer" onclick="afficher_resultat()">
-    <input type="button" name="aj_li" value="aj_li" onclick="ajouter_ligne()">
+    <input type="button" name="calculer" value="Calculer" onclick="calc_score_ligne()">
+    <input type="button" name="aj_li" value="ajouter une ligne" onclick="ajouter_ligne()">
   </form>
 
 <!-- Intégration de mon Javascript -->
   <script type="text/javascript">
-    function afficher_resultat(){
-      document.getElementById('total').value = calc_score();
-    }
-
     function ajouter_ligne() {
       var ligne = document.getElementById('ligne_joueur');
       var ligne_prime = ligne.cloneNode(true);
       ligne.after(ligne_prime);
-      ligne_prime.getElementsByClassName('carte bleu').setAttribute('id', '')
-
-    }
-    //Fonction initialisation
-    function init_nb_joueur(){
-      var nb_joueur = prompt("Combien y a-t-il de joueur ?");
-      return nb_joueur;
+      console.log(ligne_prime.getElementsByClassName('nombre carte bleu'));
+      ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
     }
 
-    //Fonction génération de tableau
-    function tab(){
-
+    //Calcul du score
+    //calculer score des cartes par couleur
+    function calc_score_carte(ligne, couleur){
+      return calc_score_generique(ligne, "carte", couleur);
+    }
+    //calculer score des jetons par couleur
+    function calc_score_jeton(ligne, couleur){
+      return calc_score_generique(ligne, "jeton", couleur);
+    }
+    //va chercher les identifiants et calcul en fonction de...
+    function calc_score_generique(ligne, type, couleur){
+      var selecteur_nb = "nombre " + type + " " + couleur;
+      var selecteur_multiplicateur = "multiplicateur " + type + " " + couleur;
+      return ligne.getElementsByClassName(selecteur_nb)[0].value * ligne.getElementsByClassName(selecteur_multiplicateur)[0].value;
     }
 
-    //MegaFontion calcul du score
-    function calc_score() {
-      //direct
-      var pts_victoire_direct = document.getElementById('pts_vict').value;
-      //cartes
-      var pts_cartes_noires = document.getElementById('pts_cartes_noires').value * document.getElementById('mult_cartes_noires').value;
-      var pts_cartes_jaunes = document.getElementById('pts_cartes_jaunes').value * document.getElementById('mult_cartes_jaunes').value;
-      var pts_cartes_vertes = document.getElementById('pts_cartes_vertes').value * document.getElementById('mult_cartes_vertes').value;
-      var pts_cartes_bleues = document.getElementById('pts_cartes_bleues').value * document.getElementById('mult_cartes_bleues').value;
-      //jetons
-      var mult_jetons_rouges = document.getElementById('mult_jetons_rouges').value;
-      mult_jetons_rouges ++;
-      var pts_jetons_rouges = document.getElementById('pts_jetons_rouges').value * mult_jetons_rouges;
-      var mult_jetons_bleus = document.getElementById('mult_jetons_bleus').value;
-      mult_jetons_bleus ++;
-      var pts_jetons_bleus = document.getElementById('pts_jetons_bleus').value * mult_jetons_bleus;
-      console.log(parseInt(pts_victoire_direct) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
-      return (parseInt(pts_victoire_direct) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
+    function calc_score_ligne(){
+      var ligne = document.getElementById('ligne_joueur');
+      var total = parseInt(ligne.getElementsByClassName('pts_vict direct')[0].value);
+      total += calc_score_carte(ligne, "noir");
+      total += calc_score_carte(ligne, "jaune");
+      total += calc_score_carte(ligne, "vert");
+      total += calc_score_carte(ligne, "bleu");
+      total += calc_score_jeton (ligne, "rouge");
+      total += calc_score_jeton (ligne, "bleu");
+      ligne.getElementsByClassName('pts_vict total')[0].value = total;
     }
   </script>
 <!-- Intégration de la feuille de script -->
