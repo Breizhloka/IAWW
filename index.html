@@ -24,58 +24,80 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
 -->
 
 <body>
-  <form name="fromulaire" onsubmit="calc_score()">
-    <label for="pts_vict">Points de victoire</label>
-    <input type="text" class="intext" name="pts_vict" id="pts_vict">
-  </br></br>
-
-    <label for="pts_cartes_grises">Cartes grises</label>
-    <input type="text" class="intext" name="pts_cartes_grises" id="pts_cartes_grises">
-    <label for="mult_cartes_grises">Multiplicateur</label>
-    <input type="text" class="intext" name="mult_cartes_grises" id="mult_cartes_grises">
-   </br>
-
-   <label for="pts_cartes_noires">Cartes noires</label>
-   <input type="text" class="intext" name="pts_cartes_noires" id="pts_cartes_noires">
-   <label for="mult_cartes_grises">Multiplicateur</label>
-   <input type="text" class="intext" name="mult_cartes_noires" id="mult_cartes_noires">
-  </br>
-
-    <label for="pts_cartes_jaunes">Cartes jaunes</label>
-    <input type="text" class="intext" name="pts_cartes_jaunes" id="pts_cartes_jaunes">
-    <label for="mult_cartes_jaunes">Multiplicateur</label>
-    <input type="text" class="intext" name="mult_cartes_jaunes" id="mult_cartes_jaunes">
-   </br>
-
-   <label for="pts_cartes_vertes">Cartes vertes</label>
-   <input type="text" class="intext" name="pts_cartes_vertes" id="pts_cartes_vertes">
-   <label for="mult_cartes_vertes">Multiplicateur</label>
-   <input type="text" class="intext" name="mult_cartes_vertes" id="mult_cartes_vertes">
-  </br>
-
-    <label for="pts_cartes_bleues">Cartes bleues</label>
-    <input type="text" class="intext" name="pts_cartes_bleues" id="pts_cartes_bleues">
-    <label for="mult_cartes_bleues">Multiplicateur</label>
-    <input type="text" class="intext" name="mult_cartes_bleues" id="mult_cartes_bleues">
-  </br></br>
-
-   <label for="pts_jetons_rouges">Jetons rouges</label>
-   <input type="text" class="intext" name="pts_jetons_rouges" id="pts_jetons_rouges">
-   <label for="mult_jetons_rouges">Multiplicateur</label>
-   <input type="text" class="intext" name="mult_jetons_rouges" id="mult_jetons_rouges">
-  </br>
-
-  <label for="pts_jetons_bleus">Jetons bleus</label>
-  <input type="text" class="intext" name="pts_jetons_bleus" id="pts_jetons_bleus">
-  <label for="mult_jetons_bleus">Multiplicateur</label>
-  <input type="text" class="intext" name="mult_jetons_bleus" id="mult_jetons_bleus">
- </br></br>
-
-
-    <input class="btn" type="submit" value="Envoyer" id="btn_submit">
+  <form name="fromulaire">
+    <table>
+      <tr>
+        <th>Joueur</th>
+        <th>pts victoire</th>
+        <th>Noir</th>
+        <th>Jaune</th>
+        <th>Vert</th>
+        <th>Bleu</th>
+        <th>Jetons rouges</th>
+        <th>Jetons bleus</th>
+        <th>Total</th>
+      </tr>
+      <tr id="ligne_joueur">
+        <td>Joueur 1</td>
+        <td>
+          <input type="text" class="pts_vict direct" name="pts_vict" id="pts_vict">
+        </td>
+        <td>
+          <input type="number" class="carte noir" name="pts_cartes_noires" id="pts_cartes_noires" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte noir" name="mult_cartes_noires" id="mult_cartes_noires" placeholder="Multiplicateur">
+       </td>
+        <td>
+          <input type="number" class="carte jaune" name="pts_cartes_jaunes" id="pts_cartes_jaunes" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte jaune" name="mult_cartes_jaunes" id="mult_cartes_jaunes" placeholder="Multiplicateur">
+        </td>
+        <td>
+          <input type="number" class="carte vert" name="pts_cartes_vertes" id="pts_cartes_vertes" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte vert" name="mult_cartes_vertes" id="mult_cartes_vertes" placeholder="Multiplicateur">
+        </td>
+        <td>
+          <input type="number" class="carte bleu" name="pts_cartes_bleues" id="pts_cartes_bleues" placeholder="Nb cartes"> x
+          <input type="number" class="multiplicateur carte bleu" name="mult_cartes_bleues" id="mult_cartes_bleues" placeholder="Multiplicateur">
+        </td>
+        <td>
+          <input type="number" class="jeton rouge" name="pts_jetons_rouges" id="pts_jetons_rouges" placeholder="Nb jetons"> x
+          <input type="number" class="multiplicateur jeton rouge" name="mult_jetons_rouges" id="mult_jetons_rouges" placeholder="Multiplicateur">
+        </td>
+        <td>
+          <input type="number" class="jeton bleu" name="pts_jetons_bleus" id="pts_jetons_bleus" placeholder="Nb jetons"> x
+          <input type="number" class="multiplicateur jeton bleu" name="mult_jetons_bleus" id="mult_jetons_bleus" placeholder="Multiplicateur">
+        </td>
+        <td><input type="number" id="total" class="pts_vict total" disabled></td>
+      </tr>
+    </table>
+    <input type="button" name="calculer" value="Calculer" onclick="afficher_resultat()">
+    <input type="button" name="aj_li" value="aj_li" onclick="ajouter_ligne()">
   </form>
+
+  <!-- <button onclick="init_nb_joueur()">Commencer</button> -->
 <!-- Intégration de mon Javascript -->
   <script type="text/javascript">
+    function afficher_resultat(){
+      document.getElementById('total').value = calc_score();
+    }
+
+    function ajouter_ligne() {
+      var ligne = document.getElementById('ligne_joueur');
+      var ligne_prime = ligne.cloneNode(true);
+      ligne.after(ligne_prime);
+      ligne_prime.getElementsByClassName('carte bleu').setAttribute('id', '')
+
+    }
+    //Fonction initialisation
+    function init_nb_joueur(){
+      var nb_joueur = prompt("Combien y a-t-il de joueur ?");
+      return nb_joueur;
+    }
+
+    //Fonction génération de tableau
+    function tab(){
+
+    }
+
     /*/Fonctions de calculs
       //Points direct
     function pts_direct() {
@@ -103,7 +125,6 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       //direct
       var pts_victoire_direct = document.getElementById('pts_vict').value;
       //cartes
-      var pts_cartes_grises = document.getElementById('pts_cartes_grises').value * document.getElementById('mult_cartes_grises').value;
       var pts_cartes_noires = document.getElementById('pts_cartes_noires').value * document.getElementById('mult_cartes_noires').value;
       var pts_cartes_jaunes = document.getElementById('pts_cartes_jaunes').value * document.getElementById('mult_cartes_jaunes').value;
       var pts_cartes_vertes = document.getElementById('pts_cartes_vertes').value * document.getElementById('mult_cartes_vertes').value;
@@ -115,8 +136,8 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       var mult_jetons_bleus = document.getElementById('mult_jetons_bleus').value;
       mult_jetons_bleus ++;
       var pts_jetons_bleus = document.getElementById('pts_jetons_bleus').value * mult_jetons_bleus;
-      alert(parseInt(pts_victoire_direct) + parseInt(pts_cartes_grises) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
-      return (parseInt(pts_victoire_direct) + parseInt(pts_cartes_grises) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
+      console.log(parseInt(pts_victoire_direct) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
+      return (parseInt(pts_victoire_direct) + parseInt(pts_cartes_noires) + parseInt(pts_cartes_jaunes) + parseInt(pts_cartes_vertes) + parseInt(pts_cartes_bleues) + parseInt(pts_jetons_rouges) + parseInt(pts_jetons_bleus));
     }
 
     /*function calc_score() {
