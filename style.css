@@ -3,15 +3,18 @@ body {
   background-color: #eee;
 }
 
-form {
-  margin: 30px;
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin: 20px;
+  text-align: center;
 }
 
-#bloc_nom_JF {
-  display: none;
+th, td {
+  border: 1px solid black;
+  padding: 5px 5px;
 }
 
-.erreur {
-  padding-left: 10px;
-  color: red;
+input[type="number"] {
+  width: 100px;
 }
