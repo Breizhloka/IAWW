@@ -14,12 +14,8 @@ Feuille de score It's a Wonderful World
 Idée 1 : Demander le nombre de joueurs > nb_bouton = nb_joueurs > entrer les données pour chaque joueur > remplir un tableau avec les données.
 Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée = au nb de joueurs > remplir les champs pour chacun > créer un tableau des scores.
 
-- Programmer les différents calculs de points :
-  - pt victoire brut
-  - Nb cartes couleur x Multiplicateur [gris, noir, vert, jaune, bleu]
-  - Nb jetons x (Multiplicateur + 1) [Jeton femme rouge, Jeton homme bleu]
-- Mettre en forme fiche 1 joueur
-- Créer les fiches en dynamique en fonction du nb de joueurs
+- Trouver comment Dupliquer sans garder les valeurs (effacer les valeurs) forEach/tag name/value = 0
+- Comment dupliquer à la fin du tableau
 
 -->
 
@@ -37,7 +33,7 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
         <th>Jetons bleus</th>
         <th>Total</th>
       </tr>
-      <tr id="ligne_joueur">
+      <tr id="ligne_joueur" class="ligne_score">
         <td><input type="text" class="nom_joueur" name="nom_joueur" placeholder="Joueur"></td>
         <td>
           <input type="number" class="pts_vict direct" name="pts_vict" placeholder="Nb pts victoire">
@@ -69,19 +65,12 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
         <td><input type="number" class="pts_vict total" disabled></td>
       </tr>
     </table>
-    <input type="button" name="calculer" value="Calculer" onclick="calc_score_ligne()">
-    <input type="button" name="aj_li" value="ajouter une ligne" onclick="ajouter_ligne()">
+    <input type="button" name="calculer" value="Calculer" onclick="calc_score()">
+    <input type="button" name="aj_li" value="Ajouter une ligne" onclick="ajouter_ligne()">
   </form>
 
 <!-- Intégration de mon Javascript -->
   <script type="text/javascript">
-    function ajouter_ligne() {
-      var ligne = document.getElementById('ligne_joueur');
-      var ligne_prime = ligne.cloneNode(true);
-      ligne.after(ligne_prime);
-      console.log(ligne_prime.getElementsByClassName('nombre carte bleu'));
-      ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
-    }
 
     //Calcul du score
     //calcule le score des cartes par couleur
@@ -98,10 +87,18 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       var selecteur_multiplicateur = "multiplicateur " + type + " " + couleur;
       return ligne.getElementsByClassName(selecteur_nb)[0].value * ligne.getElementsByClassName(selecteur_multiplicateur)[0].value;
     }
+    //vérifier si c'est un nombre, sinon renvoyer 0
+    function get_integer(nombre){
+      if (isNaN(nombre)|| nombre === "") {
+        return 0;
+      }
+      return parseInt(nombre);
+    }
     //Megafonction de calcul du score d'une ligne du tableau des scores
-    function calc_score_ligne(){
-      var ligne = document.getElementById('ligne_joueur');
-      var total = parseInt(ligne.getElementsByClassName('pts_vict direct')[0].value);
+    function calc_score_ligne(ligne){
+      //var ligne = document.getElementById('ligne_joueur');
+      var total = get_integer(ligne.getElementsByClassName('pts_vict direct')[0].value);
+
       var tab_couleur_carte = ['noir', 'jaune', 'vert', 'bleu'];
       var tab_couleur_jeton = ['bleu', 'rouge'];
       tab_couleur_carte.forEach((item) => {
@@ -112,34 +109,23 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
       });
       ligne.getElementsByClassName('pts_vict total')[0].value = total;
   }
+  //fonction qui calcule ligne par ligne
+  function calc_score(){
+    Array.from(document.getElementsByClassName('ligne_score')).forEach((ligne) => {
+      calc_score_ligne(ligne);
+    });
 
-/*    function calc_score_ligne(){
-      var ligne = document.getElementById('ligne_joueur');
-      var total = parseInt(ligne.getElementsByClassName('pts_vict direct')[0].value);
-      total += parseInt(calc_score_carte(ligne, "noir"));
-      total += calc_score_carte(ligne, "jaune");
-      total += calc_score_carte(ligne, "vert");
-      total += calc_score_carte(ligne, "bleu");
-      total += calc_score_jeton (ligne, "rouge");
-      total += calc_score_jeton (ligne, "bleu");
-      ligne.getElementsByClassName('pts_vict total')[0].value = total;
-    }*/
+  }
 
-    /*function calc_score_ligne(){
-      var ligne = document.getElementById('ligne_joueur');
-      var total = parseInt(0);
-      console.log(total);
-      total += parseInt(ligne.getElementsByClassName('pts_vict direct')[0].value);
-      console.log(total);
-      total += parseInt(calc_score_carte(ligne, "noir"));
-      total += calc_score_carte(ligne, "jaune");
-      total += calc_score_carte(ligne, "vert");
-      total += calc_score_carte(ligne, "bleu");
-      total += calc_score_jeton (ligne, "rouge");
-      total += calc_score_jeton (ligne, "bleu");
-      console.log(total);
-      ligne.getElementsByClassName('pts_vict total')[0].value = total;
-    }*/
+  //Dupliquer la ligne
+  function ajouter_ligne() {
+    var ligne = document.getElementById('ligne_joueur');
+    var ligne_prime = ligne.cloneNode(true);
+    ligne.after(ligne_prime);
+
+    //ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
+  }
+
   </script>
 <!-- Intégration de la feuille de script -->
   <script type="text/javascript" src="js/script.js"></script>
