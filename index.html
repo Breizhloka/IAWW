@@ -11,10 +11,8 @@
 <!--
 
 Feuille de score It's a Wonderful World
-Idée 1 : Demander le nombre de joueurs > nb_bouton = nb_joueurs > entrer les données pour chaque joueur > remplir un tableau avec les données.
-Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée = au nb de joueurs > remplir les champs pour chacun > créer un tableau des scores.
 
-- Trouver comment Dupliquer sans garder les valeurs (effacer les valeurs) forEach/tag name/value = 0
+- Trouver comment Dupliquer sans garder les valeurs (effacer les valeurs (= 0) des input en les ciblants avec tagname dans une boucle forEach)
 - Comment dupliquer à la fin du tableau
 
 -->
@@ -96,7 +94,6 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
     }
     //Megafonction de calcul du score d'une ligne du tableau des scores
     function calc_score_ligne(ligne){
-      //var ligne = document.getElementById('ligne_joueur');
       var total = get_integer(ligne.getElementsByClassName('pts_vict direct')[0].value);
 
       var tab_couleur_carte = ['noir', 'jaune', 'vert', 'bleu'];
@@ -121,7 +118,10 @@ Idée 2 : Demander le nombre de joueurs > créer un tableau avec un nb d'entrée
   function ajouter_ligne() {
     var ligne = document.getElementById('ligne_joueur');
     var ligne_prime = ligne.cloneNode(true);
+    var fin_tableau = ligne_joueur[ligne_joueur.length-1];
     ligne.after(ligne_prime);
+    console.log(ligne_joueur[ligne_joueur.length-1]);
+    console.log(fin_tableau);
 
     //ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
   }
