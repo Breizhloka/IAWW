@@ -118,8 +118,9 @@ Feuille de score It's a Wonderful World
   function ajouter_ligne() {
     var ligne = document.getElementById('ligne_joueur');
     var ligne_prime = ligne.cloneNode(true);
-    var fin_tableau = ligne_joueur[ligne_joueur.length-1];
     ligne.after(ligne_prime);
+    var fin_tableau = ligne_joueur[ligne_joueur.length-1];
+    fin_tableau.after(ligne_prime);
     console.log(ligne_joueur[ligne_joueur.length-1]);
     console.log(fin_tableau);
 
