@@ -124,7 +124,8 @@ Feuille de score It's a Wonderful World
     //console.log(ligne_prime.getElementsByTagName('input'));
     for (var i = 0; i < ligne_prime.getElementsByTagName('input').length; i++) {
       var tab_prime = ligne_prime.getElementsByTagName('input')[i];
-      console.log(Array(tab_prime.value));
+      //console.log(Array(tab_prime.value));
+      Array(ligne_prime.getElementsByTagName('input')[i].value = "")
     }
 
     //console.log(ligne_joueur[2]);
