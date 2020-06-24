@@ -119,10 +119,19 @@ Feuille de score It's a Wonderful World
     var ligne = document.getElementById('ligne_joueur');
     var ligne_prime = ligne.cloneNode(true);
     ligne.after(ligne_prime);
+
+    //var tab_prime = Array(ligne_prime.getElementsByTagName('input')[i].value);
+    //console.log(ligne_prime.getElementsByTagName('input'));
+    for (var i = 0; i < ligne_prime.getElementsByTagName('input').length; i++) {
+      var tab_prime = ligne_prime.getElementsByTagName('input')[i];
+      console.log(Array(tab_prime.value));
+    }
+
+    //console.log(ligne_joueur[2]);
     var fin_tableau = ligne_joueur[ligne_joueur.length-1];
     fin_tableau.after(ligne_prime);
-    console.log(ligne_joueur[ligne_joueur.length-1]);
-    console.log(fin_tableau);
+    //console.log(ligne_joueur[ligne_joueur.length-1]);
+    //console.log(fin_tableau);
 
     //ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
   }
