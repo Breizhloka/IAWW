@@ -31,33 +31,33 @@ Feuille de score It's a Wonderful World
         <th>Total</th>
       </tr>
       <tr id="ligne_joueur" class="ligne_score">
-        <td><input type="text" class="nom_joueur" name="nom_joueur" placeholder="Joueur" onblur="calc_score()"></td>
+        <td><input type="text" class="nom_joueur calc_listener" name="nom_joueur" placeholder="Joueur" ></td>
         <td>
-          <input type="number" class="pts_vict direct" name="pts_vict" placeholder="Nb pts victoire" onblur="calc_score()">
+          <input type="number" class="pts_vict direct calc_listener" name="pts_vict" placeholder="Nb pts victoire">
         </td>
         <td>
-          <input type="number" class="nombre carte noir" name="pts_cartes_noires" placeholder="Nb cartes" onblur="calc_score()"> </br>x</br>
-          <input type="number" class="multiplicateur carte noir" name="mult_cartes_noires" placeholder="Multiplicateur" onblur="calc_score()">
+          <input type="number" class="nombre carte noir calc_listener" name="pts_cartes_noires" placeholder="Nb cartes"> </br>x</br>
+          <input type="number" class="multiplicateur carte noir calc_listener" name="mult_cartes_noires" placeholder="Multiplicateur">
        </td>
         <td>
-          <input type="number" class="nombre carte jaune" name="pts_cartes_jaunes" placeholder="Nb cartes" onblur="calc_score()"> </br>x</br>
-          <input type="number" class="multiplicateur carte jaune" name="mult_cartes_jaunes" placeholder="Multiplicateur" onblur="calc_score()">
+          <input type="number" class="nombre carte jaune calc_listener" name="pts_cartes_jaunes" placeholder="Nb cartes"> </br>x</br>
+          <input type="number" class="multiplicateur carte jaune calc_listener" name="mult_cartes_jaunes" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="nombre carte vert" name="pts_cartes_vertes" placeholder="Nb cartes" onblur="calc_score()"> </br>x</br>
-          <input type="number" class="multiplicateur carte vert" name="mult_cartes_vertes" placeholder="Multiplicateur" onblur="calc_score()">
+          <input type="number" class="nombre carte vert calc_listener" name="pts_cartes_vertes" placeholder="Nb cartes"> </br>x</br>
+          <input type="number" class="multiplicateur carte vert calc_listener" name="mult_cartes_vertes" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="nombre carte bleu" name="pts_cartes_bleues" placeholder="Nb cartes" onblur="calc_score()"> </br>x</br>
-          <input type="number" class="multiplicateur carte bleu" name="mult_cartes_bleues" placeholder="Multiplicateur" onblur="calc_score()">
+          <input type="number" class="nombre carte bleu calc_listener" name="pts_cartes_bleues" placeholder="Nb cartes"> </br>x</br>
+          <input type="number" class="multiplicateur carte bleu calc_listener" name="mult_cartes_bleues" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="nombre jeton rouge" name="pts_jetons_rouges" placeholder="Nb jetons" onblur="calc_score()"> </br>x</br>
-          <input type="number" class="multiplicateur jeton rouge" name="mult_jetons_rouges" placeholder="Multiplicateur" onblur="calc_score()">
+          <input type="number" class="nombre jeton rouge calc_listener" name="pts_jetons_rouges" placeholder="Nb jetons"> </br>x</br>
+          <input type="number" class="multiplicateur jeton rouge calc_listener" name="mult_jetons_rouges" placeholder="Multiplicateur">
         </td>
         <td>
-          <input type="number" class="nombre jeton bleu" name="pts_jetons_bleus" placeholder="Nb jetons" onblur="calc_score()"> </br>x</br>
-          <input type="number" class="multiplicateur jeton bleu" name="mult_jetons_bleus" placeholder="Multiplicateur" onblur="calc_score()">
+          <input type="number" class="nombre jeton bleu calc_listener" name="pts_jetons_bleus" placeholder="Nb jetons"> </br>x</br>
+          <input type="number" class="multiplicateur jeton bleu calc_listener" name="mult_jetons_bleus" placeholder="Multiplicateur">
         </td>
         <td><input type="number" class="pts_vict total" disabled></td>
       </tr>
@@ -134,6 +134,12 @@ Feuille de score It's a Wonderful World
     //ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
   }
 
+  var calc_listener = document.querySelectorAll('.calc_listener');
+  for (var i = 0; i < calc_listener.length; i++) {
+    calc_listener[i].addEventListener('change', () => {
+      calc_score();
+    });
+  }
   </script>
 <!-- Intégration de la feuille de script -->
   <script type="text/javascript" src="js/script.js"></script>
