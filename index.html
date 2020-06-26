@@ -134,12 +134,19 @@ Feuille de score It's a Wonderful World
     //ligne_prime.getElementsByClassName('nombre carte bleu')[0].setAttribute('id', 'toto');
   }
 
-  var calc_listener = document.querySelectorAll('.calc_listener');
-  for (var i = 0; i < calc_listener.length; i++) {
-    calc_listener[i].addEventListener('change', () => {
-      calc_score();
-    });
+  //Change les scores à chaque changement de valeur dans un input
+  function calc_listener() {
+    console.log("test");
+    var calc_listener = document.querySelectorAll('.calc_listener');
+    for (var i = 0; i < calc_listener.length; i++) {
+      calc_listener[i].addEventListener('change', () => {
+        calc_score();
+      });
+    }
   }
+    //setInterval permet d'appliquer la fonction clac_listener à toutes les lignes du tableau et pas seulement à la première présente à l'execution de la page
+    setInterval(calc_listener, 0);
+
   </script>
 <!-- Intégration de la feuille de script -->
   <script type="text/javascript" src="js/script.js"></script>
