@@ -12,7 +12,7 @@
 
 Feuille de score It's a Wonderful World
 
-- Rendre le caclul des points dynamique
+- Afficher le classement
 
 -->
 
@@ -62,7 +62,6 @@ Feuille de score It's a Wonderful World
         <td><input type="number" class="pts_vict total" disabled></td>
       </tr>
     </table>
-    <input type="button" name="calculer" value="Calculer" onclick="calc_score()">
     <input type="button" name="aj_li" value="Ajouter une ligne" onclick="ajouter_ligne()">
   </form>
 
@@ -140,11 +139,31 @@ Feuille de score It's a Wonderful World
     for (var i = 0; i < calc_listener.length; i++) {
       calc_listener[i].addEventListener('change', () => {
         calc_score();
+        classement_score();
       });
     }
   }
     //setInterval permet d'appliquer la fonction clac_listener à toutes les lignes du tableau et pas seulement à la première présente à l'execution de la page
       //setInterval(calc_listener, 0);
+
+  //Fonction permettant de trouver l'ordre des scores et d'afficher le classement à côté des colonnes
+    /*
+      - Récupérer les valeurs totales
+      - Ordonner du plus grand au plus petit
+      - Changer couleur des trois premier + gérer les égalités
+    */
+
+    function classement_score() {
+      let scores_totaux = Array.from(document.querySelectorAll('.total'));
+      scores_totaux.sort((a,b) => { return b.value - a.value; });
+      //Gérer les égalités
+      scores_totaux[0].style.borderColor = "gold";
+      scores_totaux[0].style.color = "gold";
+      scores_totaux[1].style.borderColor = "silver";
+      scores_totaux[1].style.color = "silver";
+      scores_totaux[2].style.borderColor = "peru";
+      scores_totaux[2].style.color = "peru";
+    }
 
   </script>
 <!-- Intégration de la feuille de script -->
